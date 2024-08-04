@@ -8,13 +8,14 @@ app.set("view engine", "ejs")
 app.use(express.static(path.join(__dirname, 'public')))
 
 io.on("connection", (socket) => {
-    socket.on("send-location", (data) => {
-        io.emit("receive-location", { id: socket.id, ...data })
+    socket.on("send-location", ({ latitude, longitude }) => {
+        io.emit("receive-location", { id: socket.id, latitude, longitude })
         console.log(socket.id)
     })
     socket.on("disconnect", () => {
         io.emit("user-disconnected", socket.id)
     })
+    console.log("Socket successfully connected")
 })
 app.get('/', function (req, res) {
     res.render("index")
