@@ -21,6 +21,10 @@ app.get('/', function (req, res) {
     res.render("index")
 })
 
+app.get('/test', function (req, res) {
+    res.send("hello world!")
+})
+
 
 server.listen(port, () => { console.log(`Listening on Port ${port}`) })
 
